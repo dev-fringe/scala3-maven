@@ -1,7 +1,4 @@
-import org.springframework.context.annotation.{AnnotationConfigApplicationContext, Configuration}
+import org.springframework.boot.builder.SpringApplicationBuilder
 import javax.annotation.PostConstruct
 
-@main def i = new AnnotationConfigApplicationContext(classOf[Test])
-@Configuration class Test {
-  @PostConstruct def i = print("test")
-}
+@main def i = new SpringApplicationBuilder(classOf[Test2]).run()
