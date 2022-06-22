@@ -24,21 +24,21 @@ public class Test2 implements WebFluxConfigurer{
     int port = 8082;
     @Autowired ApplicationContext context;
 
-    @PostConstruct
-    public void init(){
-        String[] beans = context.getBeanDefinitionNames();
-        for (String bean : beans) {
-            System.out.println(bean);
-        }
-        context.getBean(HttpServer.class).bindNow().onDispose().block();
-    }
-
     @Bean
     public HttpServer nettyHttpServer(ApplicationContext context) {
         HttpHandler handler = WebHttpHandlerBuilder.applicationContext(context).build();
         ReactorHttpHandlerAdapter adapter = new ReactorHttpHandlerAdapter(handler);
         HttpServer httpServer = HttpServer.create().host("localhost").port(this.port);
         return httpServer.handle(adapter);
+    }
+
+    @PostConstruct
+    public void init(){
+        String[] beans = context.getBeanDefinitionNames();
+        for (String bean : beans) {
+            System.out.println(bean);
+        }
+        context.getBean(HttpServer.class).bindNow().onDispose().block(); // webflux server start
     }
 
     @RequestMapping("/")
