@@ -15,7 +15,7 @@ import reactor.netty.http.server.HttpServer;
 import javax.annotation.PostConstruct;
 import java.util.concurrent.TimeUnit;
 
-@EnableWebFlux// not working .web(WebApplicationType.NONE)
+@EnableWebFlux// not working .web(WebApplicationType.NONE) and spring.main.allow-circular-references=true need
 @Configuration
 @RestController
 public class Test2 implements WebFluxConfigurer{
