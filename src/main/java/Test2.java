@@ -13,7 +13,6 @@ import org.springframework.web.server.adapter.WebHttpHandlerBuilder;
 import reactor.netty.http.server.HttpServer;
 
 import javax.annotation.PostConstruct;
-import java.util.concurrent.TimeUnit;
 
 @EnableWebFlux// not working .web(WebApplicationType.NONE) and spring.main.allow-circular-references=true need
 @Configuration
@@ -34,10 +33,6 @@ public class Test2 implements WebFluxConfigurer{
 
     @PostConstruct
     public void init(){
-        String[] beans = context.getBeanDefinitionNames();
-        for (String bean : beans) {
-            System.out.println(bean);
-        }
         context.getBean(HttpServer.class).bindNow().onDispose().block(); // webflux server start
     }
 
